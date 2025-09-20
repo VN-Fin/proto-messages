@@ -137,7 +137,9 @@ message BotSignalMessage {
   repeated double positions = 3;                // Single float, not repeated\
   string symbol = 4;
   string strategy = 5;
-  int64 price = 6;
-  string engine = 7;                 // e.g., "AI-BOT", "TA-BOT", "MACD-BOT"
-  int64 updated = 8;                   // Unix timestamp
+  double price = 6;
+  double stop_loss = 7;
+  string engine = 8;                 // e.g., "AI-BOT", "TA-BOT", "MACD-BOT"
+  int64 updated = 9;                   // Unix timestamp
+
 }
