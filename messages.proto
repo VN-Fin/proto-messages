@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+option go_package = "xpb;xpb";
+
+
+message StockOHLCVMessage {
+  int64 time = 1;
+  string symbol = 2;
+  string resolution = 3;  // e.g. "MIN", "HOUR1", "DAY"
+  double open = 4;
+  double high = 5;
+  double low = 6;
+  double close = 7;
+  double volume = 8;
+}
+
+
+message StockTopPriceMessage {
+  int64 time = 1;
+  string symbol = 2;
+  repeated double bp = 3;  // bid prices
+  repeated double bq = 4;  // bid quantities
+  repeated double ap = 5;  // ask prices
+  repeated double aq = 6;  // ask quantities
+  double total_bid = 7;
+  double total_ask = 8;
+}
+
+
+message StockTickMessage {
+  int64 time = 1;
+  string symbol = 2;
+  double price = 3;
+  double vol = 4;
+  string side = 5;
+}
+
+message StockForeignMessage {
+  int64 time = 1;
+  string symbol = 2;
+  double total_room = 3;
+  double current_room = 4;
+  double buy_vol = 5;
+  double sell_vol = 6;
+  double buy_val = 7;
+  double sell_val = 8;
+}
+
+message StockInfoMessage {
+  int64 time = 1;
+  string symbol = 2;
+  double open = 3;
+  double high = 4;
+  double low = 5;
+  double close = 6;
+  double avg = 7;
+  double ceil = 8;
+  double floor = 9;
+  double prior = 10;
+}
+
+message StockPriceBoardMessage {
+  int64 time = 1;
+  string symbol = 2;
+  double price = 3;
+  double vol = 4;
+  double total_vol = 5;
+  double total_val = 6;
+  double change = 7;
+  double change_pct = 8;
+}
+
+message StockMarketIndexMessage {
+  int64 time = 1;
+  string symbol = 2;
+  string name = 3;
+  double prior = 4;
+  double value = 5;
+  double total_vol = 6;
+  double total_val = 7;
+  int64 advance = 8;
+  int64 decline = 9;
+  int64 nochange = 10;
+  int64 ceil = 11;
+  int64 floor = 12;
+  double change = 13;
+  double change_pct = 14;
+}
+
+message StockBoardEventMessage {
+  int64 time = 1;
+  string symbol = 2;
+  string market_id = 3;
+  string board_id = 4;
+  string board_id_original = 5;
+  string event_id = 6;
+  string trading_schedule_control_id = 7;
+  string trading_session_id = 8;
+}
+
+
+message AIBotSignalMessageMessage {
+  int64 time = 1;                   // Unix timestamp
+  string symbol = 2;
+  string name = 3;
+  int64 signal_time = 4;               // Unix timestamp
+  double signal_price = 5;
+  double position = 6;
+  repeated double positions = 7;                // Single float, not repeated
+  int64 updated = 8;                   // Unix timestamp
+
+  // Model config
+  double book_size = 9;
+  string recall_name = 10;
+  string freq = 11;
+
+  // Current state at signal time
+  double current_account_position = 12;
+  double current_market_price = 13;
+  int64 current_market_time = 14;      // Unix timestamp
+  double avg_price = 15;
+
+  // Previous state
+  double prev_signal_price = 16;
+  int64 prev_signal_time = 17;         // Unix timestamp
+  double prev_position = 18;
+}
+
+message UnknownMessage {
+  string msg = 1;  // For debugging, can be used to log unexpected messages
+}
+
+
+message BotSignalMessage {
+  int64 time = 1;                   // Unix timestamp
+  double position = 2;
+  repeated double positions = 3;                // Single float, not repeated\
+  string symbol = 4;
+  string strategy = 5;
+  int64 price = 6;
+  string engine = 7;                 // e.g., "AI-BOT", "TA-BOT", "MACD-BOT"
+  int64 updated = 8;                   // Unix timestamp
+}
