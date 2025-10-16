@@ -1,4 +1,4 @@
-module github.com/vn-fin/proto-messages
+module github.com/vn-fin/xno-messages
 
 go 1.23
 
